@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import AddTask from "./components/AddTask";
+import Header from "./components/Header";
+import Tasks from "./components/Tasks";
+
+import {useStateContext}  from "./context/ContextProvider";
 
 function App() {
+  const { loading } = useStateContext()
+
+  if(loading){
+    return <div className="text-3xl">Loading ...</div>
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <AddTask />
+      <Tasks />
     </div>
   );
 }
