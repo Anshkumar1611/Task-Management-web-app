@@ -1,21 +1,23 @@
 import React from 'react'
 import { MdDelete, MdEdit } from "react-icons/md"
+import { useStateContext } from '../context/ContextProvider'
 
-const Task = () => {
+const Task = ({ item }) => {
+  const { deleteTask, editTask } = useStateContext()
   return (
-    <div className='w-64 h-48 bg-yellow-400 rounded-lg'>
+    <div className='w-64 h-36 bg-yellow-200 rounded-lg'>
       <div className="flex h-full flex-col justify-between">
         <div>
-          <p className='text-center p-2 text-lg'>Here comes your task</p>
+          <p className='text-center p-2 text-lg'>Task : {item.text}</p>
         </div>
         <div className='flex flex-row justify-between items-center p-4'>
-          <div className='flex flex-col '>
-            <p>Monday</p>
-            <p>16/11/2000</p>
+          <div className='flex flex-col'>
+            <p>Due : </p>
+            <p>{item.day}</p>
           </div>
           <div className='flex flex-row gap-4'>
-            <MdEdit size={20} className="rounded-full cursor-pointer text-green-500 hover:scale-110 hover:text-green-600" />
-            <MdDelete size={20} className=" rounded-full cursor-pointer text-red-500 hover:scale-110 hover:text-red-600" />
+            <MdEdit onClick={() => editTask(item.id)} size={20} className="rounded-full cursor-pointer text-green-500 hover:scale-110 hover:text-green-600" />
+            <MdDelete size={20} onClick={() => deleteTask(item.id)} className=" rounded-full cursor-pointer text-red-500 hover:scale-110 hover:text-red-600" />
           </div>
         </div>
       </div>
